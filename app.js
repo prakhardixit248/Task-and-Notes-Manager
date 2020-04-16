@@ -1,9 +1,11 @@
 const express = require('express');
 
 const Sequelize=require('sequelize');
+var bodyParser = require('body-parser');
 
 const app=express();
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const db=new Sequelize({
     dialect: 'sqlite' ,
     storage: __dirname+'/test.db'
@@ -51,14 +53,15 @@ app.get('/todos',(req,res)=>
 
 app.post('/todos',(req,res)=>
 {
+    console.log(req.body.taskname);
     db.sync().then(()=>{
      Tasks.create({
-         title:"exercise",
-         description:"stay healthy",
-         duedate:"02-30-2020"
+         title:req.body.taskname,
+         description:req.body.description,
+         duedate:12-12-12
         }).then((task)=> 
         {
-            console.log(req.params);
+            //console.log(req.params);
         // you can now access the newly created user
         res.send(task.dataValues);
         }).catch(function(err)
