@@ -6,18 +6,22 @@ body{
     width: 30%;
     float: left;
     margin-left: 10%;
-    margin-top: 5%;
+    margin-top: 2%;
     font-family: "Calibri Light";
 }
 .abtn{
     font-size: 14px;
-
+}
+.ebtn{
+    font-size: 14px;
+    margin-left: 10%;
+    font-family: "Calibri Light";
 }
 .rcontent{
     width: 30%;
     float: right;
     margin-right: 10%;
-    margin-top: 5%;
+    margin-top: 2%;
     font-family: "Calibri Light";
 }
 .taskhandler {
