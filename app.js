@@ -11,6 +11,12 @@ const db=new Sequelize({
     storage: __dirname+'/test.db'
 })
 
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth();
+d = n.getDate()+ 1;
+date= d + "/" + m + "/" + y;
+
 const Tasks=db.define('task',{
     id:{
         type:Sequelize.INTEGER,
@@ -27,7 +33,7 @@ const Tasks=db.define('task',{
     },
     duedate:{
         type:Sequelize.STRING,
-        allowNull:false
+        defaultValue:date
     },
     status:{
         type:Sequelize.STRING(40),
@@ -53,12 +59,10 @@ app.get('/todos',(req,res)=>
 
 app.post('/todos',(req,res)=>
 {
-    console.log(req.body.taskname);
     db.sync().then(()=>{
      Tasks.create({
          title:req.body.taskname,
          description:req.body.description,
-         duedate:12-12-12
         }).then((task)=> 
         {
             //console.log(req.params);
