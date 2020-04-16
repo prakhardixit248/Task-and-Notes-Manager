@@ -25,7 +25,8 @@ const Tasks=db.define('task',{
     },
     title:{
         type:Sequelize.STRING(40),
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
     description:{
         type:Sequelize.STRING(100),
@@ -46,6 +47,19 @@ const Tasks=db.define('task',{
 }, {
     timestamps: false
   })
+
+  const Notes=db.define('note',{
+    id:{
+        type:Sequelize.INTEGER,
+        primaryKey:true,
+        autoIncrement :true
+    },
+    description:{
+        type:Sequelize.STRING(100),
+        allowNull:false
+    }}, {
+        timestamps: false
+      });
 
   db.sync();
 
@@ -100,14 +114,30 @@ app.patch('/todos/:id',(req,res)=>
         console.log(err)
     })
 })
+app.patch('/todos/',(req,res)=>
+{
+    console.log(req);
+    Tasks.update({
+    description:req.body.description,
+    duedate:req.body.date,
+    priority:req.body.priority,
+    status:req.body.status
+   },
+   {
+       where:{title:req.body.taskname
+    }}).catch((err)=>
+    {
+        console.log(err)
+    })
+})
 app.get('/todos',(req,res)=>{
  res.send(task.title);
 })
-app.get('/todos/4/notes',()=>{
+app.get('/todos/:id/notes',()=>{
 
 })
 
-app.post('/todos/4/notes',()=>
+app.post('/todos/:id/notes',()=>
 {
 })
 

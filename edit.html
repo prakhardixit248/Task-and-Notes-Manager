@@ -8,7 +8,7 @@
     <title>Edit task</title>
 </head>
 <body>
-<form class="form1" action="todos" method="POST">
+<form class="form1" action="todos" method="PATCH">
     <h2>Edit Task</h2>
     <div class="form-group">
         Task Name<input type="text" name="taskname" id="taskname" class="form-control form-control-sm"/>
@@ -29,8 +29,8 @@
     <div class="form-group">Status
         <select class="form-control form-control-sm" id="status" name="status">
             <option id="option" name="option">Not Selected</option>
-            <option value="high">Completed</option>
-            <option value="medium">Incomplete</option>
+            <option value="completed">Completed</option>
+            <option value="incomplete">Incomplete</option>
         </select>
     </div>
     <div class="form-group">
