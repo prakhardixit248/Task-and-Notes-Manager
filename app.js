@@ -77,6 +77,8 @@ app.post('/todos',(req,res)=>
      Tasks.create({
          title:req.body.taskname,
          description:req.body.description,
+         status:req.body.status,
+         priority:req.body.priority
         }).then((task)=> 
         {
             //console.log(req.params);
@@ -133,12 +135,26 @@ app.patch('/todos/',(req,res)=>
 app.get('/todos',(req,res)=>{
  res.send(task.title);
 })
-app.get('/todos/:id/notes',()=>{
-
-})
-
-app.post('/todos/:id/notes',()=>
-{
+app.get('/todos/notes/:id',()=>{
+    Notes.findOne({
+        where: {
+            id:parseInt(req.params.id)
+        }
+    }).then((note)=>{
+    console.log(note.dataValues);
+    res.send(note.dataValues);
+    });
+    })
+app.post('/todos/notes',(req,res)=>{
+    Tasks.findOne({
+        where: {
+           title:req.body.taskname
+        }
+    }).then((task)=>{
+        Notes.create({id:task.dataValues.id,description:req.body.description}).then((note)=>{
+            res.send(note);
+        })
+    })
 })
 
 app.get('/',(req,res)=>{
@@ -147,5 +163,7 @@ app.get('/',(req,res)=>{
 app.get('/edit',(req,res)=>{
     res.sendFile(__dirname+'/edit.html');
 })
-
+app.get('/addnotes',(req,res)=>{
+    res.sendFile(__dirname+'/addnotes.html');
+})
 app.listen(3030);
