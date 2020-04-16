@@ -58,9 +58,9 @@ app.post('/todos',(req,res)=>
          duedate:"02-30-2020"
         }).then((task)=> 
         {
+            console.log(req.params);
         // you can now access the newly created user
-        console.log(task.dataValues);
-        res.send(task.dataValues)
+        res.send(task.dataValues);
         }).catch(function(err)
          {
         // print the error details
@@ -103,7 +103,7 @@ app.post('/todos/4/notes',()=>
 })
 
 app.get('/',(req,res)=>{
-    res.redirect('index.html');
+    res.sendFile(__dirname+'/index.html');
 })
 
 app.listen(3030);
