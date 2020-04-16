@@ -1,11 +1,11 @@
 const express = require('express');
-
 const Sequelize=require('sequelize');
 var bodyParser = require('body-parser');
 
 const app=express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 const db=new Sequelize({
     dialect: 'sqlite' ,
     storage: __dirname+'/test.db'
@@ -100,7 +100,9 @@ app.patch('/todos/:id',(req,res)=>
         console.log(err)
     })
 })
-
+app.get('/todos',(req,res)=>{
+ res.send(task.title);
+})
 app.get('/todos/4/notes',()=>{
 
 })
@@ -111,6 +113,9 @@ app.post('/todos/4/notes',()=>
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/index.html');
+})
+app.get('/edit',(req,res)=>{
+    res.sendFile(__dirname+'/edit.html');
 })
 
 app.listen(3030);
