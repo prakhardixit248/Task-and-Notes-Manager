@@ -135,7 +135,7 @@ app.patch('/todos/',(req,res)=>
 app.get('/todos',(req,res)=>{
  res.send(task.title);
 })
-app.get('/todos/notes/:id',()=>{
+app.get('/todos/notes/:id',(req,res)=>{
     Notes.findOne({
         where: {
             id:parseInt(req.params.id)
