@@ -99,3 +99,16 @@ $ git remote -v
 Push the changes in your local repository to GitHub.
 
 $ git push origin master
+
+
+
+
+
+
+
+
+Extra
+
+git remote set-url origin
+
+git push -f origin master
